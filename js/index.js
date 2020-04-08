@@ -5,6 +5,7 @@ let get = (selector)=>{
 
 let body = get('.container.home');
 let logo = get('.logo-heading');
+let navBar = get('.main-navigation');
 let navLinks = document.querySelectorAll('a');
 let image = document.querySelectorAll('img');
 
@@ -15,19 +16,34 @@ function getRandomColor(){
 }
 
 
-function mouseOver(){
-    logo.style.color = getRandomColor();
-    logo.style.background = getRandomColor();
-    logo.style.borderRadius = '5px';
+// function mouseOver(){
+//     target.style.color = getRandomColor();
+//     target.style.background = getRandomColor();
+//     target.style.borderRadius = '5px';
+// }
+
+// function mouseOut(){
+//     logo.style.color = '#212529';
+//     logo.style.background = 'white';
+// }
+
+function mouseOver(element){
+    element.addEventListener('mouseover', (e)=>{
+        element.style.color = getRandomColor();
+        element.style.background = getRandomColor();
+        // e.stopPropagation();
+    });
 }
 
-function mouseOut(){
-    logo.style.color = '#212529';
-    logo.style.background = 'white';
+function mouseOut(element){
+    element.addEventListener('mouseout', (e)=>{
+        element.style.color = '#212529';
+        element.style.background = 'white';
+        // e.stopPropagation();
+    });
 }
-
-logo.addEventListener('mouseover', mouseOver);
-logo.addEventListener('mouseout', mouseOut);
+mouseOver(navBar);
+mouseOut(navBar);
 
 
 function keyDown(){
@@ -52,18 +68,15 @@ body.addEventListener('wheel', scroll);
 
 navLinks.forEach(a=>{
     a.addEventListener('mousedown', (e)=>{
-        e.target.style.backgroundColor = getRandomColor();
-        e.target.style.color = getRandomColor();
+        e.target.style.fontWeight = 'bold';
         
         setTimeout(()=>{
-            e.target.style.backgroundColor = 'white';
-            e.target.style.color = '#212529';
+            e.target.style.fontWeight = 'normal';
         }, 1500);
     });
 
     a.addEventListener('mouseup', (e)=>{
-        e.target.style.backgroundColor = 'white';
-        e.target.style.color = '#212529';
+        e.target.style.fontWeight = 'normal';
     });
 
     a.addEventListener('click', (e)=>{
